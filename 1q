@@ -1,0 +1,107 @@
+.macro push arg1
+    stdu \arg1, 16(1)
+.endm
+.macro pop arg1
+    ldu \arg1,  0(1)
+    subi 1,1, 16 
+.endm
+    .text
+    .text
+    .text
+    .global f
+f:
+    ld 15, af@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+    ld 15, if@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+    ld 15, nf@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+    ld 15, if@toc(2)
+    push 15
+    ld 15, nf@toc(2)
+    pop 16
+    cmp 0, 1, 15, 16
+    bc 0x4, 2,  nEquals6
+    xor 15, 15, 15
+    addi 15, 15, 1
+    b endExp6
+nEquals6:
+    xor 15, 15, 15
+endExp6:
+    add. 15, 15, 15
+    bc 0x4 ,2, elsef
+    ld 15, af@toc(2)
+    blr
+    b endstatef
+elsef:
+endstatef:
+    ld 15, af@toc(2)
+    push 15
+    ld 15, if@toc(2)
+    pop 16
+    mulld 15, 15, 16
+    std 15, af@toc(2)
+    ld 15, if@toc(2)
+    push 15
+    li 15, 1
+    pop 16
+    add 15, 15, 16
+    std 15, if@toc(2)
+    ld 15, nf@toc(2)
+    std 15, nf@toc(2)
+    mfspr 17, 8
+    push 17
+    bl f
+    pop 17
+    mtspr 8, 17
+    blr
+    blr
+    .global factorial
+factorial:
+    li 15, 1
+    std 15, af@toc(2)
+    li 15, 1
+    std 15, if@toc(2)
+    ld 15, nfactorial@toc(2)
+    std 15, nf@toc(2)
+    mfspr 17, 8
+    push 17
+    bl f
+    pop 17
+    mtspr 8, 17
+    blr
+    blr
+    .global main
+main:
+    li 15, 5
+    std 15, nfactorial@toc(2)
+    mfspr 17, 8
+    push 17
+    bl factorial
+    pop 17
+    mtspr 8, 17
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+    b exit
+    .data
+     .fill 8000
+.section ".toc", "aw"
+af:    .quad 0
+if:    .quad 0
+nf:    .quad 0
+nfactorial:    .quad 0
+stackBase:
+stackBasePtr:
+    .quad stackBase
+    .global entry
+entry :
+    .quad main
+    .quad .TOC.@tocbase
+    .quad 0
