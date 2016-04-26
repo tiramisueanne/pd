@@ -17,8 +17,8 @@ LD=${PPC}/ld
 CFLAGS=-g -std=gnu99 -O0 -Werror -Wall
 OFILES=$(subst .c,.o,$(CFILES))
 
-p5 : $(OFILES) Makefile
-	gcc $(CFLAGS) -o p5 $(OFILES)
+pd : $(OFILES) Makefile
+	gcc $(CFLAGS) -o pd $(OFILES)
 
 %.o : %.c Makefile
 	gcc $(CFLAGS) -MD -c $*.c
@@ -26,9 +26,9 @@ p5 : $(OFILES) Makefile
 %.o : %.S Makefile
 	($(AS) -o $*.o $*.S) || touch $@
 
-%.S : %.fun p5
+%.S : %.fun pd
 	@echo "========== $* =========="
-	(./p5 < $*.fun > $*.S) || touch $@
+	(./pd < $*.fun > $*.S) || touch $@
 
 progs : $(PROGS)
 
@@ -63,7 +63,7 @@ clean :
 	rm -f *.out
 	rm -f *.d
 	rm -f *.o
-	rm -f p5
+	rm -f pd
 	rm -f *.diff
 
 -include *.d

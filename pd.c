@@ -6,22 +6,23 @@
 #include <string.h>
 int howManyBytes = 2000;
 int off;
-extern void  genExp();
+extern void genExp();
 int blo;
+//this holds all of the args given
 typedef struct args{
     char *nam;
     struct args *next;
     struct args *behind;
 } args;
-
+//this holds what the 
 typedef struct local{
-    //this is supposed to hold the var name but I'm getting three????
     char *var;
     char *varCalled;
     struct local *next;
     int offset;
 } local;
 
+//this is a function
 typedef struct funk{
     struct local *locals;
     int callTimes;
@@ -30,31 +31,40 @@ typedef struct funk{
     struct args *parm;
     struct funk *next;
 } funk;
+
 funk *header;
+//this will tell us what statement we are using
 void state(Statement *p, char *Stringnamer, char *funkN) {
-    //printf("got into state");
-    //printf("%d:%s:%d", p->kind, Stringnamer, blo);
+    /*printf("got into state");
+      printf("%d:%s:%d", p->kind, Stringnamer, blo);*/
     char *namr = malloc(sizeof(char *));
+    //this is remnants of my locality code
     strcpy(namr, Stringnamer);
     funk *temp = header;
     temp = temp->next;
+    //while 
     while(strcmp(temp->namefunk, funkN) != 0) {
         temp = temp->next;
     }
+    //remember to change the name of the character so that it reflects where it is at 
+    //( could reintroduce locality)
     switch(p->kind) {
-        //remember to change the name of the character so that it reflects where it is at
+        //this is an assignment
         case 0: {
+            //gets us the local variables
             local *tmp = temp->locals;
-            //this genExp is fucking up
+            //this is making sure that 
             while(tmp->next != 0  && strcmp(tmp->var, p->assignName) != 0) {
                 tmp= tmp->next;
             }
+            //this is what I also used to create unique names
             asprintf(&namr, "%s%s", p->assignName, Stringnamer);
+            //I changed up a couple things in here to get rid of locality
             while(strcmp(tmp->var, p->assignName) == 0 && strcmp(tmp->varCalled,namr) != 0) {
-                //printf("%s:%s", "old namr was", namr);
-                //printf("%s:%d", "this is the length of the namr", (int) strlen(namr));
+                /*printf("%s:%s", "old namr was", namr);
+                  printf("%s:%d", "this is the length of the namr", (int) strlen(namr)); */
                 namr[strlen(namr) -1] = '\0';
-                //printf("%s:%s", "this is the new namr", namr);
+                /*printf("%s:%s", "this is the new namr", namr);*/
                 if((int) strlen(namr) == 0) {
                     asprintf(&namr, "%s%s", p->assignName, Stringnamer);
                     break;
