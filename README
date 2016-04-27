@@ -1,8 +1,0 @@
-So what is the game plan? 
-
-Here is my idea.
-Since we are going to be implementing security stuff, a good plan of action would be to implement arrays, but perhaps limiting ourself to creating an array in only one particular way, such as array a = {0, 1, 2, 3}. 
-
-Then, once we have this array, we can index into it, such that a[0] = 0, or write into it. We can also through an error when someone tries to write an array out of bounds error. 
-
-We could also reintroduce locality, which is what we were supposed to do but a lot of people decided against it.

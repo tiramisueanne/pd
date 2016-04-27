@@ -14,15 +14,16 @@ typedef struct args{
     struct args *next;
     struct args *behind;
 } args;
-//this holds what the 
+//this holds what the local variables
 typedef struct local{
     char *var;
+    //this is what we call the variable
     char *varCalled;
     struct local *next;
     int offset;
 } local;
 
-//this is a function
+//this is a function and who calls it and whatnot
 typedef struct funk{
     struct local *locals;
     int callTimes;
@@ -132,6 +133,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             printf("endwhelp%s:\n", namr);
             break;
         }
+        //handle blocks
         case 4: {
             if(p->block->first== 0) {
                 break;
@@ -154,7 +156,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             blo--;
             break;
         }
-        //the return value
+        //the return value, where we can start implementing control flow values
         case 5: {
             //printf("got into the return value");
             genExp(p->returnValue, Stringnamer, funkN);
@@ -383,7 +385,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
         }
     }
 }
-
+//generate the different functions
 void genFun(Fun * p) {
     printf("    .global %s\n", p->name);
     printf("%s:\n", p->name);
@@ -419,11 +421,11 @@ void genFun(Fun * p) {
         }*/
 
     
-   // printf("f    mov $0,%%rax\n");
-   // printf("%s:%d", "this is the case for genFun", p->body->kind);
-   // printf("%s:%d", "this is the case for genFun", p->body->kind);
-   // printf("%s:%d", "this is the case for genFun", p->body->kind);
-   // printf("%s:%d", "this is the case for genFun", p->body->kind);
+    /*printf("f    mov $0,%%rax\n");
+      printf("%s:%d", "this is the case for genFun", p->body->kind);
+      printf("%s:%d", "this is the case for genFun", p->body->kind);
+      printf("%s:%d", "this is the case for genFun", p->body->kind);
+      printf("%s:%d", "this is the case for genFun", p->body->kind); */
     switch(p->body->kind) {
         //remember to change the name of the character so that it reflects where it is at
         case 0: {
@@ -493,44 +495,47 @@ void genFun(Fun * p) {
         printf("    blr\n");
     }
     
-    
 }
+//this is called first to go through all of the functions and properly document them
 void firstGo(Fun *p) {
+    //I actually think this should be size of local lol
     local *hdr = malloc(sizeof(header));
     hdr->var = "";
     hdr->next = 0;
     local *tmp = hdr;
     funk* temp = header;
-    //printf("%s\n", p->name);
-
+    /*printf("%s\n", p->name);*/
     while(temp->next != 0) {
         temp = temp->next;
     }
+    //this is a new funk entry
     funk *newEnt = malloc(sizeof(funk));
     newEnt->form = 0;
     newEnt->namefunk = p->name;
     newEnt->next= 0;
     newEnt->locals = hdr;
     newEnt->callTimes = 0;
+    //adds the new entry to the list of funks
     temp->next = newEnt;
     args *headr = malloc(sizeof( args));
     //header of the args
     args *temP = headr;
     //this puts all of the arguments into the 
     if(p->formals != 0) {
-        //printf("%s:%d\n", "this is the number of arguments that this function takes", p->formals->n);
-        //printf("    .data\n");
+        /*printf("%s:%d\n", "this is the number of arguments that this function takes", p->formals->n);
+          printf("    .data\n"); */
         //this stores all of the formal arguments
         int numOfForm = p->formals->n;
         for(int x = 1; x<=numOfForm; x++) {
-            //printf("%s:%s", "this is the function that we are in ", p->name);
+            /*printf("%s:%s", "this is the function that we are in ", p->name);*/
+            //this is setting up the arguments for the funk
             args *newP = malloc(sizeof(args ));
             temP->next = newP;
             newP->behind = temP;
             newP->nam = p->formals->first;
             p->formals = p->formals->rest;
             temP = newP;
-            //printf("%s%s:   .quad 0\n", newP->nam, newEnt->namefunk);
+            /*printf("%s%s:   .quad 0\n", newP->nam, newEnt->namefunk);*/
             local *newLoc = malloc(sizeof(local));
             newLoc->var = newP->nam;
             asprintf(&newLoc->varCalled, "%s%s", newP->nam, newEnt->namefunk);
@@ -538,13 +543,14 @@ void firstGo(Fun *p) {
             tmp->next = newLoc;
             tmp = tmp->next;
         }
-        //printf("%s:%s", "this is the header of our args", newEnt->locals->var );
+        /*printf("%s:%s", "this is the header of our args", newEnt->locals->var );*/
         printf("    .text\n");
         newEnt->form = numOfForm;
         newEnt->parm = headr;
     }
-    //printf("it gets to the end of first go");
+    /*printf("it gets to the end of first go");*/
 }
+//
 void firstGoes(Funs *p) {
     if(p == 0) {
         return;
@@ -552,9 +558,12 @@ void firstGoes(Funs *p) {
     firstGo(p->first);
     firstGoes(p->rest);
 }
+//this goes through all of the functions recursively
 void genFuns(Funs * p) {
+    //if there are no more functions, then we stop the recursion
     if (p == 0)
         return;
+    //this goes through all of the functions first to properly document
     firstGoes(p);
     genFun(p->first);
     genFuns(p->rest);
@@ -572,22 +581,27 @@ void genFuns(Funs * p) {
     //printf("formatting:   .string \"%%d\\n\"\n");
     *return 0;
 }*/
+//a doubly linked list of used Local something or others
 typedef struct usedLocs {
     char *usedN;
     struct usedLocs *next;
     struct usedLocs *bck;
 } usedLocs;
+
+//this starts off the program 
 int main(int argc, char *argv[]) {
     usedLocs *lastr = malloc(sizeof(usedLocs));
     lastr->usedN = "";
     lastr->next =0;
+    //parses the Funs
     Funs *p = parse();
-    off = 0;
+    off = 0;    
+    //this is creating an empty funk
     header = malloc(sizeof(funk));
     header->namefunk = "header";
     header->form = 0;
     header->next = 0;
-    
+    //set up our macros
     printf(".macro push arg1\n");
     printf("    std \\arg1, 8(1)\n");
     printf("    addi 1, 1, 8\n");
@@ -596,45 +610,60 @@ int main(int argc, char *argv[]) {
     printf("    ld \\arg1,  0(1)\n");
     printf("    subi 1,1, 8\n");
     printf(".endm\n");
-    //printf("we got into main");
+    /*printf("we got into main");*/
     printf("    .text\n");
+    //THE MEATS OF OUR PROGRAM
     genFuns(p);
     printf("    .data\n");
     printf("     .fill 8000\n");
     printf(".section \".toc\", \"aw\"\n");
-   //insert a for loop that goes through all of the funcs and prints all of the datas for everything
+    //insert a for loop that goes through all of the funcs and prints all of the datas for everything
     funk *temp = header;
     if(temp->next != 0) {
-       // printf("we have at least one function");
+        /* printf("we have at least one function");*/
         temp = temp->next;
-
+        //not actually super sure why this while loop is like this lol
         while(temp != 0) {
+            //this gets us all of the local variables
             local *locs = temp->locals;
+            //goes through all of the local variables
     	    if(locs->next != 0) {
                     locs = locs->next;
-                   // printf("%s:%s", "this is the name of a variable in the function", locs->varCalled);
+                    /*printf("%s:%s", "this is the name of a variable in the function", locs->varCalled);*/
                     while(locs != 0) {
+                        //this gives us all of the variables that we have used already, 
+                        //to help us get rid of our program trying to access two addresses with the same 
+                        //reference
                         usedLocs *tmp = lastr;
+                        //this goes through all of the variables we have already used
                         while(tmp->next != 0) {
+                            //if it is already used, STAHPIT DON'T USE IT
                             if(strcmp(locs->var, tmp->usedN ) == 0) {
                                 break;
                             }
                             tmp = tmp->next;
                         }
+                        //however
+                        //if it's not used
+                        //u can use it u kno, it ain't got no address already
                         if(strcmp(locs->var, tmp->usedN ) != 0) {
                             
                             printf("%s:    .quad 0\n", locs->var);
+                            //adding to the list of names we already used
                             usedLocs *newUse = malloc(sizeof(usedLocs));
+                            //to reintroduce localization, we would make this varCalled
                             newUse->usedN = locs->var;
                             newUse->next = 0;
                             tmp->next = newUse;
                         }
+                        //go on to the next local variable
                         locs = locs->next;
                     }
             }
             temp = temp->next;
         }
     }
+    //this is just setting everything up
     printf("stackBase:\n");
     printf("stackBasePtr:\n");
     printf("    .quad stackBase\n");
