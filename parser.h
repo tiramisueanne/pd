@@ -15,6 +15,12 @@ typedef struct Actuals {
     struct Actuals *rest;
 } Actuals;
 
+typedef struct ArrayBits {
+    int n;
+    Expression *first;
+    struct ArrayBits *rest;
+} ArrayBits;
+
 enum EKind {
     eVAR,
     eVAL,
@@ -25,9 +31,10 @@ enum EKind {
     eLT,
     eGT,
     eCALL,
-    eArray
+    eARRAY
 };
-//we could add the array to the different 
+
+//we could add the array to the different
 //types of expressions
 struct Expression {
     enum EKind kind;
@@ -38,8 +45,9 @@ struct Expression {
         struct{
                 //I don't know how to make it so that 
                 //it's not expression pointers lol
-                Expression *first;
-                Expression *rest;
+                Expression *firstBit;
+                ArrayBits *restBit;
+                uint32_t length;
         };
         /* EPLUS, EMUL, ... */ struct {
             Expression *left;
@@ -80,7 +88,7 @@ enum SKind {
     sIf,
     sWhile,
     sBlock,
-    sReturn,
+    sReturn
 };
 
 struct Statement {

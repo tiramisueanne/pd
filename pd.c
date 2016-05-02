@@ -19,6 +19,7 @@ typedef struct local{
     char *var;
     //this is what we call the variable
     char *varCalled;
+    int length;
     struct local *next;
     int offset;
 } local;
@@ -80,6 +81,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 local *newLoc = malloc(sizeof(local));
                 newLoc->var = p->assignName;
                 newLoc->next = 0;
+                newLoc->length = 1;
                 asprintf(&newLoc->varCalled, "%s%s", p->assignName, Stringnamer);
                 tmp->offset = off;
                 off += 64;
@@ -179,7 +181,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
     //printf("got into genExp");
     expNum++;
    // printf("got into genExp\n");
-   // printf("%d\n", p->kind); 
+   // printf("%d\n", p->kind);
     funk *temp = header;
     temp = temp->next;
     char *namr = malloc(sizeof(char *));
@@ -372,11 +374,20 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             printf("    pop 17\n");
             printf("    mtspr 8, 17\n");
             break;
-        /*}
-       //else {
-	    //printf("    b %s\n", p->callName);
-          //  break;
-        //}*/
+        }
+
+        //this is the case in which it is an array
+        case 9: {
+            //I would say that the length and the name of the array should be kept
+            //by the program
+
+            //we could put down the length in the data section
+            /*while(p->first != 0) {
+                genExp(p->first, stringNamer, funkN);
+
+            }*/
+
+
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);

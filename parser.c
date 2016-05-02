@@ -173,7 +173,7 @@ static void peek() {
                 consumeChar();
                 current.kind = tRBRACE;
                 return;
-            //added in the identifying cases for 
+            //added in the identifying cases for
             //both left and right square bracket
             case '[':
                 consumeChar();
@@ -318,21 +318,23 @@ static int isLeft() {
     peek();
     return current.kind == tLEFT;
 }
+
 //trying to identify and set current.kind to our
-/*static int isLeftSq() {
+static int isLeftSq() {
     peek();
     return current.kind == tLEFTSQ;
-}*/
+}
 
 static int isRight() {
     peek();
     return current.kind == tRIGHT;
 }
+
 //two different sqare brackets
-/*static int isRightSq() {
+static int isRightSq() {
     peek();
     return current.kind == tRIGHTSQ;
-}*/
+}
 
 static int isEnd() {
     peek();
@@ -389,7 +391,23 @@ static Actuals *actuals(void) {
 }
 
 //read up the array and store it in a new union
-//static havetoFigureOutTheUnion
+static ArrayBits *arrayBits(void) {
+    if(isRightSq()) {
+        return 0;
+    }
+    ArrayBits *p = NEW(ArrayBits);
+    p->first = expression();
+    p->rest = 0;
+    p->n = 1;
+
+    if(isComma()) {
+        consume();
+        p->rest = arrayBits();
+        p->n = p->rest->n + 1;
+    }
+    return p;
+}
+
 /* handle id, literals, and (...) */
 static Expression *e1(void) {
     if (isLeft()) {
@@ -410,10 +428,21 @@ static Expression *e1(void) {
         e->val = v;
         return e;
         //this is where we notify our program THAT AN ARRAY HAS OCCURRED
-    } /*else if (isLeftSq()) {
-
-    }*/
-
+    } else if (isLeftSq()) {
+        //eat up that left sq
+        consume();
+        //create an expression to return
+        Expression *e = NEW(Expression);
+        //and the arraybits to fill it with
+        ArrayBits *p = arrayBits();
+        //now to fill up 
+        e->kind = eARRAY;
+        e->firstBit = p->first;
+        e->restBit = p->rest;
+        e->length = p->n;
+        //aaaaand return
+        return e;
+    }
     else if (isId()) {
         /* xyz */
         char *id = getId();
@@ -625,7 +654,6 @@ static Block *block(void) {
             p->n = 1;
         }
     }
-
     return p;
 }
 

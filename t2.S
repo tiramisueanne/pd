@@ -38,8 +38,6 @@ endExp6:
     add. 15, 15, 15
     bc 0xC ,2, elsef
     ld 15, a@toc(2)
-#WHAT HAVE I DONE WRONG
-#main
     blr
     b endstatef
 elsef:
