@@ -156,9 +156,9 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             blo--;
             break;
         }
-        //the return value, where we can start implementing control flow values
+        //the return value
         case 5: {
-            //printf("got into the return value");
+            /*printf("got into the return value");*/
             genExp(p->returnValue, Stringnamer, funkN);
             if(strcmp(funkN, "main") != 0) {
                 printf("    blr\n");
@@ -342,22 +342,22 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
         }
         //the call function
         case 8: {
-            //printf("I got into case 8 in function");
+            /*printf("I got into case 8 in function");*/
             funk *temp = header;
             temp = temp->next;
-            //printf("%s:%s", "this is the name of the function that we're trying to call", p->callName);
-            //printf("%s:%s", "this is the name of the function", temp->namefunk);
+            /*printf("%s:%s", "this is the name of the function that we're trying to call", p->callName);
+              printf("%s:%s", "this is the name of the function", temp->namefunk);*/
             while(strcmp(temp->namefunk, p->callName) != 0) {
                 //might cause bugs if the function isn't there
                 temp = temp->next;
 
             }
-            //printf("%s%s", "this is the function that we are looking at right now", temp->namefunk);
+            /*printf("%s%s", "this is the function that we are looking at right now", temp->namefunk);*/
             int numOfArgs = temp->form;
-            //printf("%s:%d", "this is the number of arguments this function takes", numOfArgs);
+            /*printf("%s:%d", "this is the number of arguments this function takes", numOfArgs);*/
             args *tempArgs = temp->parm;
 
-            //temp->callTimes = temp->callTimes +1;
+            /*temp->callTimes = temp->callTimes +1;*/
             for(int x = 1; x<=numOfArgs; x++) {
                 tempArgs = tempArgs->next;
                 genExp(p->callActuals->first, stringNamer, funkN);
@@ -365,19 +365,18 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 printf("    std 15, %s@toc(2)\n", tempArgs->nam );
                 p->callActuals = p->callActuals->rest;
             }
-           // printf("    mov $0, %%rax\n");
-        //if(strcmp(funkN, p->callName) != 0) {
+            //if(strcmp(funkN, p->callName) != 0) {
             printf("    mfspr 17, 8\n");
             printf("    push 17\n");
             printf("    bl %s\n", p->callName);
             printf("    pop 17\n");
             printf("    mtspr 8, 17\n");
             break;
-        //}
+        /*}
        //else {
 	    //printf("    b %s\n", p->callName);
           //  break;
-        //}
+        //}*/
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);
@@ -418,10 +417,10 @@ void genFun(Fun * p) {
             if(x> 6) {
                 printf("    pop %%rax");
             }
-        }*/
+        }
 
     
-    /*printf("f    mov $0,%%rax\n");
+    printf("f    mov $0,%%rax\n");
       printf("%s:%d", "this is the case for genFun", p->body->kind);
       printf("%s:%d", "this is the case for genFun", p->body->kind);
       printf("%s:%d", "this is the case for genFun", p->body->kind);
@@ -593,6 +592,8 @@ int main(int argc, char *argv[]) {
     usedLocs *lastr = malloc(sizeof(usedLocs));
     lastr->usedN = "";
     lastr->next =0;
+    char * mainN = malloc(sizeof(10));
+    strcpy(mainN, "main");
     //parses the Funs
     Funs *p = parse();
     off = 0;    

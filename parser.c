@@ -30,7 +30,10 @@ enum TKind {
     tPRINT,
     tFUN,
     tCOMMA,
-    tRETURN
+    tRETURN,
+    //added in the left square and right square brackets 
+    tLEFTSQ,
+    tRIGHTSQ
 };
 
 struct Token {
@@ -170,6 +173,16 @@ static void peek() {
                 consumeChar();
                 current.kind = tRBRACE;
                 return;
+            //added in the identifying cases for 
+            //both left and right square bracket
+            case '[':
+                consumeChar();
+                current.kind = tLEFTSQ;
+                return;
+            case ']':
+                consumeChar();
+                current.kind = tRIGHTSQ;
+                return;
             case '+':
                 consumeChar();
                 current.kind = tPLUS;
@@ -204,6 +217,7 @@ static void peek() {
                 consumeChar();
                 current.kind = tCOMMA;
                 return;
+
             case ' ':
             case 10:
                 consumeChar();
@@ -304,11 +318,21 @@ static int isLeft() {
     peek();
     return current.kind == tLEFT;
 }
+//trying to identify and set current.kind to our
+/*static int isLeftSq() {
+    peek();
+    return current.kind == tLEFTSQ;
+}*/
 
 static int isRight() {
     peek();
     return current.kind == tRIGHT;
 }
+//two different sqare brackets
+/*static int isRightSq() {
+    peek();
+    return current.kind == tRIGHTSQ;
+}*/
 
 static int isEnd() {
     peek();
@@ -364,6 +388,8 @@ static Actuals *actuals(void) {
     return p;
 }
 
+//read up the array and store it in a new union
+//static havetoFigureOutTheUnion
 /* handle id, literals, and (...) */
 static Expression *e1(void) {
     if (isLeft()) {
@@ -383,7 +409,12 @@ static Expression *e1(void) {
         e->kind = eVAL;
         e->val = v;
         return e;
-    } else if (isId()) {
+        //this is where we notify our program THAT AN ARRAY HAS OCCURRED
+    } /*else if (isLeftSq()) {
+
+    }*/
+
+    else if (isId()) {
         /* xyz */
         char *id = getId();
         consume();

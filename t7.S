@@ -12,11 +12,14 @@
     .global a
 a:
     ld 15, x@toc(2)
+#WHAT HAVE I DONE WRONG
+#main
     blr
     blr
     .global b
 b:
     ld 15, x@toc(2)
+#-1
     blr
     blr
     .global main

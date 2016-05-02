@@ -94,6 +94,8 @@ endExp6:
     b whelpfactorial
 endwhelpfactorial:
     ld 15, v@toc(2)
+#WHAT HAVE I DONE WRONG
+#main
     blr
     blr
     .global main

@@ -24,14 +24,23 @@ enum EKind {
     eNE,
     eLT,
     eGT,
-    eCALL
+    eCALL,
+    eArray
 };
-
+//we could add the array to the different 
+//types of expressions
 struct Expression {
     enum EKind kind;
     union {
         /* EVAR */ char* varName;
         /* EVAL */ uint64_t val;
+        //this should be the array struct
+        struct{
+                //I don't know how to make it so that 
+                //it's not expression pointers lol
+                Expression *first;
+                Expression *rest;
+        };
         /* EPLUS, EMUL, ... */ struct {
             Expression *left;
             Expression *right;

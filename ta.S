@@ -71,6 +71,8 @@ main:
     addi 27, 27, 0
     add 15, 15, 27
     xor 27, 27, 27
+#WHAT HAVE I DONE WRONG
+#f1
     b exit
     b exit
     .data
