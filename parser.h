@@ -45,9 +45,9 @@ struct Expression {
         struct{
                 //I don't know how to make it so that 
                 //it's not expression pointers lol
-                Expression *firstBit;
-                ArrayBits *restBit;
-                uint32_t length;
+                //Expression *firstBit;
+                ArrayBits *arrayBit;
+                //uint32_t length;
         };
         /* EPLUS, EMUL, ... */ struct {
             Expression *left;

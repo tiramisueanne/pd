@@ -176,10 +176,12 @@ static void peek() {
             //added in the identifying cases for
             //both left and right square bracket
             case '[':
+                printf("#found the beginning of the array\n");
                 consumeChar();
                 current.kind = tLEFTSQ;
                 return;
             case ']':
+                printf("#heyo found the end\n");
                 consumeChar();
                 current.kind = tRIGHTSQ;
                 return;
@@ -399,7 +401,6 @@ static ArrayBits *arrayBits(void) {
     p->first = expression();
     p->rest = 0;
     p->n = 1;
-
     if(isComma()) {
         consume();
         p->rest = arrayBits();
@@ -437,9 +438,9 @@ static Expression *e1(void) {
         ArrayBits *p = arrayBits();
         //now to fill up 
         e->kind = eARRAY;
-        e->firstBit = p->first;
-        e->restBit = p->rest;
-        e->length = p->n;
+        //e->firstBit = p->first;
+        e->arrayBit = p->rest;
+        //e->length = p->n;
         //aaaaand return
         return e;
     }
