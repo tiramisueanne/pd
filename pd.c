@@ -87,11 +87,18 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 off += 64;
                 tmp->next = newLoc;
             }
-            genExp(p->assignValue, funkN);
+            if(p->assignValue->kind != eARRAY) {
+                genExp(p->assignValue, funkN);
             //printf("this is the assignment we are giving");
             //printf("%s:%s", "this is namr here", namr);
             //this is where we would store whatever is in our result register
             printf("    std  15, %s@toc(2)\n",p->assignName);
+            }
+            else {
+                //go through all of the expressions one by one
+                //treating them the same as a single number
+                //just changing up the name as well
+            }
             break;
         }
         //this is to handle printing
@@ -382,10 +389,9 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             //by the program
 
             //we could put down the length in the data section
-            /*while(p->first != 0) {
-                genExp(p->first, stringNamer, funkN);
+            while(p->arrayBit->first != 0) {
 
-            }*/
+            }
 
 
         }
