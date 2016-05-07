@@ -509,7 +509,7 @@ void genFun(Fun * p) {
 //this is called first to go through all of the functions and properly document them
 void firstGo(Fun *p) {
     //I actually think this should be size of local lol
-    local *hdr = malloc(sizeof(header));
+    local *hdr = malloc(sizeof(local));
     hdr->var = "";
     hdr->next = 0;
     local *tmp = hdr;
