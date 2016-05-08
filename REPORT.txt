@@ -1,3 +1,14 @@
 PROTOCOL:
 
 - variable names for non-arrays cannot begin with integers
+- fun language protocal dictates that you cannot access an array without having initialized it
+
+
+TO DO:
+-bounds checking
+-t1
+-t2
+-t3..t9
+-tb
+-tc
+-td... tg
