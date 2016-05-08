@@ -199,7 +199,40 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
         }
         //this is to handle the assigning array values 
         case 6: {
-            
+            genExp(p->value, Stringnamer, funkN);
+            //gets us the local variables
+            local *tmp = temp->locals;
+            //this is making sure that 
+            while(tmp->next != 0  && strcmp(tmp->var, p->arrayName) != 0) {
+                tmp= tmp->next;
+            }
+            //this is what I also used to create unique names
+            asprintf(&namr, "%s%s", p->arrayName, Stringnamer);
+            //I changed up a couple things in here to get rid of locality
+            while(strcmp(tmp->var, p->arrayName) == 0 && strcmp(tmp->varCalled,namr) != 0) {
+                /*printf("%s:%s", "old namr was", namr);
+                  printf("%s:%d", "this is the length of the namr", (int) strlen(namr)); */
+                namr[strlen(namr) -1] = '\0';
+                /*printf("%s:%s", "this is the new namr", namr);*/
+                if((int) strlen(namr) == 0) {
+                    asprintf(&namr, "%s%s", p->assignName, Stringnamer);
+                    break;
+                }
+            }
+            //we need to put this all at the end
+            if(strcmp(tmp->var, p->arrayName) != 0) {
+                local *newLoc = malloc(sizeof(local));
+                newLoc->var = p->arrayName;
+                newLoc->next = 0;
+                newLoc->length = p->assignValue->arrayBit->n;
+                newLoc->isArray = 1;
+                asprintf(&newLoc->varCalled, "%s%s", p->assignName, Stringnamer);
+                tmp->offset = off;
+                off += 64;
+                tmp->next = newLoc;
+            }
+            printf("    std 15, %s%d@toc(2)", p->arrayName, p->index);
+            break;
         }
         default: {
             printf("%s%d","default of state", p->kind);
