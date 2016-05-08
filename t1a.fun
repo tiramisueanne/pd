@@ -8,4 +8,5 @@ fun main() {
 
 fun show(x) {
     print x
+    return x
 }
