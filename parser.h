@@ -31,7 +31,8 @@ enum EKind {
     eLT,
     eGT,
     eCALL,
-    eARRAY
+    eARRAY,
+    eINDEX
 };
 
 //we could add the array to the different
@@ -42,7 +43,11 @@ struct Expression {
         /* EVAR */ char* varName;
         /* EVAL */ uint64_t val;
         //this should be the array struct
-        struct{
+        /* EINDEX */ struct{
+            char* arrayName;
+            uint64_t index;
+        };
+        /* EARRAY */ struct{
                 //I don't know how to make it so that 
                 //it's not expression pointers lol
                 //Expression *firstBit;

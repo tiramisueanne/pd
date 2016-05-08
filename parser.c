@@ -465,6 +465,20 @@ static Expression *e1(void) {
             consume();
 
             return e;
+        } else if(isLeftSq()){
+            /* index[num] */
+            Expression *e = NEW(Expression);
+            Expression *num = NEW(Expression);
+            num = expression();
+            e->kind = eINDEX;
+            e->arrayName = id;
+            e->index = num->val;
+            if(!isRightSq()){
+                error();
+            }
+            consume();
+
+            return e;
         } else {
             Expression *e = NEW(Expression);
             e->kind = eVAR;
