@@ -231,7 +231,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 off += 64;
                 tmp->next = newLoc;
             }
-            printf("    std 15, %s%d@toc(2)", p->arrayName, p->index);
+            printf("    std 15, %s%d@toc(2)\n", p->arrayName, p->index);
             break;
         }
         default: {
