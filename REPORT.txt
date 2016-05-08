@@ -2,6 +2,8 @@ PROTOCOL:
 
 - variable names for non-arrays cannot begin with integers
 - fun language protocal dictates that you cannot access an array without having initialized it
+- you can pass whole arrays into funs
+- you cannot access any elements outside of the bounds of the array (i.e. array of size three can access index 0,1,2)
 
 
 TO DO:
