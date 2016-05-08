@@ -1,13 +1,3 @@
-- What are the differences between RISC and CISC architectures?
+PROTOCOL:
 
-- Describe how your implementation:
-
-    * passes arguments
-    * stores local variables
-    * stores global variables
-    * returns values from functions
-
-- In PPC64, What is the purpose of:
-
-    * The TOC
-    * Function descriptors
+- variable names for non-arrays cannot begin with integers

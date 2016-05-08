@@ -401,6 +401,47 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
 
             //we could put down the length in the data section
         }
+        case 10: {
+            while(strcmp(tmp->var, p->arrayName) != 0 && tmp->next != 0 ) {
+                tmp = tmp->next;
+                    //printf("%s\n", tmp->var);
+            }
+            asprintf(&namr, "%s%s%d", p->arrayName, stringNamer, p->index);
+            /*while(strcmp(tmp->var, p->arrayName) == 0 && strcmp(tmp->varCalled, namr) != 0 ) {
+                namr[strlen(namr)-2] =  '\0';
+                //printf("%s\n", namr);
+            }*/
+       
+            /*
+        temp = header;
+            temp = temp->next;
+        while(temp != 0) {
+                printf("%s:%s", "this is the name of the funk", temp->namefunk);
+                tmp = temp->locals;
+                tmp = tmp->next; 
+          i*  while(tmp != 0) {
+                if(strcmp(tmp->var, p->varName) == 0) {
+                        printf("%s", "this is the var at the moment");
+            printf("    ld 15, %s@toc(2)\n",tmp-> varCalled);
+                    }
+                    tmp = tmp->next; 
+                
+            }*/
+
+            if(tmp->next == 0 && strcmp(tmp->var, p->arrayName) != 0) {
+            local *newLoc = malloc(sizeof(local));
+                newLoc->var = p->arrayName;
+                asprintf(&newLoc->varCalled, "%s%s", p->arrayName, funkN);
+                newLoc->next = 0;
+                tmp->next = newLoc;
+                tmp = tmp->next;
+                printf("    ld 15, %s%d@toc(2)\n",  newLoc->var, p->index);
+                break;
+            }
+            //printf("prints from the case 0 of genexp");i
+            printf("    ld 15, %s%d@toc(2)\n", tmp->var, p->index);
+            break;
+        }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);
             break;
