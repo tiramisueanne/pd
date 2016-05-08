@@ -33,7 +33,9 @@ enum TKind {
     tRETURN,
     //added in the left square and right square brackets 
     tLEFTSQ,
-    tRIGHTSQ
+    tRIGHTSQ,
+    //also tilde for ur argumentative needs
+    tTILDE
 };
 
 struct Token {
