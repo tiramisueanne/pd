@@ -571,14 +571,39 @@ static Expression *expression(void) {
 static Statement *statement(void) {
 
     if (isId()) {
+        //retrieve the statement
         Statement *p = NEW(Statement);
+        //we're assiging something
         p->kind = sAssignment;
-        p->assignName = getId();
+        //saving the var name into a temp id
+        char* name = getId();
+        //will serve as a boolean to see if this is an integer or an array index
+        int array = 0;
         consume();
+        // we are assigning an index value in here
+        if(isLeftSq()){
+            array = 1; //we are an array!
+            p->arrayName = name;
+            consume();
+            Expression *num = NEW(Expression);
+            p->index = num->val;
+            if(!isRightSq()){
+                error();
+            }
+            consume();
+        }else{
+            p->assignName = name;
+        }
+
         if (!isEq())
             error();
         consume();
-        p->assignValue = expression();
+
+        if(array){
+            p->value = expression();
+        }else{
+            p->assignValue = expression();
+        }
 
         if (isSemi()) {
             consume();

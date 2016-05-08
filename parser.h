@@ -103,6 +103,11 @@ struct Statement {
             char* assignName;
             Expression *assignValue;
         };
+        struct {
+            char* arrayName;
+            int index;
+            Expression *value;
+        };
         Expression *printValue;
         struct {
             Expression* ifCondition;
