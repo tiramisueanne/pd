@@ -467,6 +467,7 @@ static Expression *e1(void) {
             return e;
         } else if(isLeftSq()){
             /* index[num] */
+            consume();
             Expression *e = NEW(Expression);
             Expression *num = NEW(Expression);
             num = expression();
