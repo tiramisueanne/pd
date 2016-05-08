@@ -93,7 +93,8 @@ enum SKind {
     sIf,
     sWhile,
     sBlock,
-    sReturn
+    sReturn,
+    sAssArray
 };
 
 struct Statement {
