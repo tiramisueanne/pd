@@ -221,6 +221,7 @@ static void peek() {
                 return;
 
             case ' ':
+            case 9:
             case 10:
                 consumeChar();
                 break;
