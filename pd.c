@@ -20,6 +20,7 @@ typedef struct local{
     //this is what we call the variable
     char *varCalled;
     int length;
+    int isArray;
     struct local *next;
     int offset;
 } local;
@@ -81,12 +82,20 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 local *newLoc = malloc(sizeof(local));
                 newLoc->var = p->assignName;
                 newLoc->next = 0;
-                newLoc->length = 1;
+                if(p->assignValue->kind != eARRAY) {
+                    newLoc->length = 1;
+                    newLoc->isArray = 0;
+                }
+                else {
+                    newLoc->length = p->assignValue->arrayBit->n;
+                    newLoc->isArray = 1;
+                }
                 asprintf(&newLoc->varCalled, "%s%s", p->assignName, Stringnamer);
                 tmp->offset = off;
                 off += 64;
                 tmp->next = newLoc;
             }
+
             printf("#hello is there anybody in there\n");
             if(p->assignValue->kind != eARRAY) {
                 genExp(p->assignValue, funkN);
@@ -675,8 +684,15 @@ int main(int argc, char *argv[]) {
                         //if it's not used
                         //u can use it u kno, it ain't got no address already
                         if(strcmp(locs->var, tmp->usedN ) != 0) {
-                            
-                            printf("%s:    .quad 0\n", locs->var);
+                            if(locs->isArray == 0 ) {
+                                 printf("%s:    .quad 0\n", locs->var);
+                            }
+                            else {
+                                //since we have now made it so that identities cannot end in numbers, this is kosher
+                                for(int i = 0; i<locs->length; i++) {
+                                    printf("%s%d:   .quad 0\n", locs->var, i);
+                                }
+                            }
                             //adding to the list of names we already used
                             usedLocs *newUse = malloc(sizeof(usedLocs));
                             //to reintroduce localization, we would make this varCalled

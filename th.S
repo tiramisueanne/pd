@@ -99,7 +99,10 @@ main:
     .data
      .fill 8000
 .section ".toc", "aw"
-x:    .quad 0
+x0:   .quad 0
+x1:   .quad 0
+x2:   .quad 0
+x3:   .quad 0
 stackBase:
 stackBasePtr:
     .quad stackBase
