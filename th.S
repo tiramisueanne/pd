@@ -2,6 +2,12 @@
 #heyo found the end
 #found the beginning of the array
 #heyo found the end
+#found the beginning of the array
+#heyo found the end
+#found the beginning of the array
+#heyo found the end
+#found the beginning of the array
+#heyo found the end
 .macro push arg1
     std \arg1, 8(1)
     addi 1, 1, 8
@@ -99,6 +105,24 @@ main:
 #got into state
 #1:main:0
     ld 15, x1@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+#got into state
+#1:main:0
+    ld 15, x0@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+#got into state
+#1:main:0
+    ld 15, x2@toc(2)
+    mfspr 17, 8
+    bl print
+    mtspr 8, 17
+#got into state
+#1:main:0
+    ld 15, x3@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
