@@ -577,12 +577,11 @@ static Statement *statement(void) {
         p->kind = sAssignment;
         //saving the var name into a temp id
         char* name = getId();
-        //will serve as a boolean to see if this is an integer or an array index
-        int array = 0;
         consume();
         // we are assigning an index value in here
         if(isLeftSq()){
-            array = 1; //we are an array!
+            //this tells us that we're going to have to index in
+            p->kind = sAssArray;
             p->arrayName = name;
             consume();
             Expression *num = NEW(Expression);
