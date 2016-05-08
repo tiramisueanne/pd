@@ -451,6 +451,7 @@ static Expression *e1(void) {
         char *id = getId();
         consume();
         if (isLeft()) {
+            printf("#did we get into actuals\n");
             /* xyz ( <actuals> ) */
             consume();
 
@@ -488,6 +489,7 @@ static Expression *e1(void) {
             return e;
         }
     } else {
+
         error();
         return 0;
     }
