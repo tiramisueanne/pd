@@ -598,7 +598,7 @@ static Statement *statement(void) {
             error();
         consume();
 
-        if(array){
+        if(p->kind == sAssArray){
             p->value = expression();
         }else{
             p->assignValue = expression();

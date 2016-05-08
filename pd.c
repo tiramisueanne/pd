@@ -197,6 +197,10 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             }
             break;
         }
+        //this is to handle the assigning array values 
+        case 6: {
+            
+        }
         default: {
             printf("%s%d","default of state", p->kind);
             break;
