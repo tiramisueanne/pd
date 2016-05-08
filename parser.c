@@ -586,6 +586,7 @@ static Statement *statement(void) {
             p->arrayName = name;
             consume();
             Expression *num = NEW(Expression);
+            num = expression();
             p->index = num->val;
             if(!isRightSq()){
                 error();
