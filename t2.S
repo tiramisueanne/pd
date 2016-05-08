@@ -11,18 +11,26 @@
     .text
     .global f
 f:
+#got into state
+#1:f:0
     ld 15, a@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:f:0
     ld 15, i@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:f:0
     ld 15, n@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#2:f:0
     ld 15, i@toc(2)
     push 15
     ld 15, n@toc(2)
@@ -37,11 +45,15 @@ nEquals6:
 endExp6:
     add. 15, 15, 15
     bc 0xC ,2, elsef
+#got into state
+#5:f:0
     ld 15, a@toc(2)
     blr
     b endstatef
 elsef:
 endstatef:
+#got into state
+#5:f:0
     ld 15, a@toc(2)
     push 15
     ld 15, i@toc(2)
@@ -140,6 +152,8 @@ factorial:
     blr
     .global main
 main:
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -171,6 +185,7 @@ main:
     bl print
     mtspr 8, 17
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"

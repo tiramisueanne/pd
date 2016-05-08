@@ -54,7 +54,7 @@ static jmp_buf escape;
 static void peek();
 
 static void error() {
-    fprintf(stderr, "===> error at %d:%d <===\n", line, pos);
+    printf( "#===> error at %d:%d <===\n", line, pos);
     longjmp(escape, 1);
 }
 
@@ -442,6 +442,7 @@ static Expression *e1(void) {
         e->arrayBit = p->rest;
         //e->length = p->n;
         //aaaaand return
+        consume();
         return e;
     }
     else if (isId()) {

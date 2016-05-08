@@ -12,6 +12,8 @@
     .text
     .global b
 b:
+#got into state
+#1:b:0
     ld 15, x@toc(2)
     push 15
     ld 15, y@toc(2)
@@ -23,6 +25,8 @@ b:
     blr
     .global c
 c:
+#got into state
+#1:c:0
     ld 15, x@toc(2)
     push 15
     ld 15, y@toc(2)
@@ -34,6 +38,8 @@ c:
     blr
     .global a
 a:
+#got into state
+#2:a:0
     ld 15, x@toc(2)
     push 15
     ld 15, y@toc(2)
@@ -48,6 +54,11 @@ nGreater9:
 endExp9:
     add. 15, 15, 15
     bc 0xC ,2, elsea
+#got into state
+#4:a:0
+#got into state
+#0:aB:66
+#hello is there anybody in there
     ld 15, x@toc(2)
     std 15, x@toc(2)
     ld 15, y@toc(2)
@@ -60,6 +71,11 @@ endExp9:
     std  15, z@toc(2)
     b endstatea
 elsea:
+#got into state
+#4:a:65
+#got into state
+#0:aB:66
+#hello is there anybody in there
     ld 15, x@toc(2)
     std 15, x@toc(2)
     ld 15, y@toc(2)
@@ -74,6 +90,9 @@ endstatea:
     blr
     .global main
 main:
+#got into state
+#0:main:0
+#hello is there anybody in there
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -124,6 +143,9 @@ main:
     pop 17
     mtspr 8, 17
     std  15, z@toc(2)
+#got into state
+#0:main:0
+#hello is there anybody in there
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -175,6 +197,7 @@ main:
     mtspr 8, 17
     std  15, z@toc(2)
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"

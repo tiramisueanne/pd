@@ -19,6 +19,8 @@ z:
     blr
     .global main
 main:
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -454,6 +456,7 @@ main:
     bl print
     mtspr 8, 17
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"

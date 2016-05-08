@@ -37,8 +37,8 @@ typedef struct funk{
 funk *header;
 //this will tell us what statement we are using
 void state(Statement *p, char *Stringnamer, char *funkN) {
-    /*printf("got into state");
-      printf("%d:%s:%d", p->kind, Stringnamer, blo);*/
+      printf("#got into state\n");
+      printf("#%d:%s:%d\n", p->kind, Stringnamer, blo);
     char *namr = malloc(sizeof(char *));
     //this is remnants of my locality code
     strcpy(namr, Stringnamer);
@@ -87,6 +87,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 off += 64;
                 tmp->next = newLoc;
             }
+            printf("#hello is there anybody in there\n");
             if(p->assignValue->kind != eARRAY) {
                 genExp(p->assignValue, funkN);
             //printf("this is the assignment we are giving");
@@ -94,10 +95,18 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             //this is where we would store whatever is in our result register
             printf("    std  15, %s@toc(2)\n",p->assignName);
             }
+
             else {
+                printf("#got into case 1 with an eARRAY\n");
                 //go through all of the expressions one by one
                 //treating them the same as a single number
                 //just changing up the name as well
+                printf("#this is the length of the array %d\n", p->assignValue->arrayBit->n);
+                for(int i=0; i<p->assignValue->arrayBit->n +1; i++) {
+                    genExp(p->assignValue->arrayBit->first, funkN);
+                    printf("    std 15, %s%d@toc(2)\n", p->assignName, i);
+                    p->assignValue->arrayBit = p->assignValue->arrayBit->rest;
+                }
             }
             break;
         }
@@ -389,11 +398,6 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             //by the program
 
             //we could put down the length in the data section
-            while(p->arrayBit->first != 0) {
-
-            }
-
-
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);
@@ -577,8 +581,10 @@ void firstGoes(Funs *p) {
 //this goes through all of the functions recursively
 void genFuns(Funs * p) {
     //if there are no more functions, then we stop the recursion
-    if (p == 0)
+    if (p == 0) {
+        printf("#but why tho\n");
         return;
+    }
     //this goes through all of the functions first to properly document
     firstGoes(p);
     genFun(p->first);
@@ -600,6 +606,7 @@ void genFuns(Funs * p) {
 //a doubly linked list of used Local something or others
 typedef struct usedLocs {
     char *usedN;
+    
     struct usedLocs *next;
     struct usedLocs *bck;
 } usedLocs;

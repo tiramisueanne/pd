@@ -9,6 +9,8 @@
     .text
     .global main
 main:
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -33,6 +35,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -88,6 +92,8 @@ endExp4:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -143,6 +149,8 @@ endExp7:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -198,6 +206,8 @@ endExp10:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -253,6 +263,8 @@ endExp13:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -308,6 +320,8 @@ endExp16:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -363,6 +377,8 @@ endExp19:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -418,6 +434,8 @@ endExp22:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -473,6 +491,8 @@ endExp25:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -528,6 +548,8 @@ endExp28:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -583,6 +605,8 @@ endExp31:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -638,6 +662,8 @@ endExp34:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -694,6 +720,7 @@ endExp37:
     bl print
     mtspr 8, 17
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"

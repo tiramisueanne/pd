@@ -9,9 +9,63 @@
     subi 1,1, 8
 .endm
     .text
+    .global main
+main:
+#got into state
+#0:main:0
+#hello is there anybody in there
+#got into case 1 with an eARRAY
+#this is the length of the array 3
+    xor 15, 15, 15
+    xor 8, 8, 8
+    li 8, 8
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 1
+    add 15, 15, 27
+    xor 27, 27, 27
+    std 15, x0@toc(2)
+    xor 15, 15, 15
+    xor 8, 8, 8
+    li 8, 8
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 2
+    add 15, 15, 27
+    xor 27, 27, 27
+    std 15, x1@toc(2)
+    b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"
+x:    .quad 0
 stackBase:
 stackBasePtr:
     .quad stackBase

@@ -10,10 +10,15 @@
     .text
     .global factorial
 factorial:
+#got into state
+#1:factorial:0
     ld 15, n@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#0:factorial:0
+#hello is there anybody in there
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -22,6 +27,9 @@ factorial:
     add 15, 15, 27
     xor 27, 27, 27
     std  15, i@toc(2)
+#got into state
+#0:factorial:0
+#hello is there anybody in there
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -44,6 +52,8 @@ factorial:
     add 15, 15, 27
     xor 27, 27, 27
     std  15, v@toc(2)
+#got into state
+#3:factorial:0
 whelpfactorial:
     ld 15, i@toc(2)
     push 15
@@ -59,6 +69,11 @@ nLess6:
 endExp6:
     add. 15, 15, 15
     bc 0xC, 2,  endwhelpfactorial
+#got into state
+#4:factorial:0
+#got into state
+#0:factorialB:66
+#hello is there anybody in there
     ld 15, i@toc(2)
     push 15
     xor 15, 15, 15
@@ -85,6 +100,9 @@ endExp6:
     pop 16
     add 15, 15, 16
     std  15, i@toc(2)
+#got into state
+#0:factorialB:66
+#hello is there anybody in there
     ld 15, v@toc(2)
     push 15
     ld 15, i@toc(2)
@@ -93,11 +111,15 @@ endExp6:
     std  15, v@toc(2)
     b whelpfactorial
 endwhelpfactorial:
+#got into state
+#5:factorial:65
     ld 15, v@toc(2)
     blr
     blr
     .global main
 main:
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -114,6 +136,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -144,6 +168,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -174,6 +200,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -204,6 +232,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -234,6 +264,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -264,6 +296,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -294,6 +328,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#1:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -325,6 +361,7 @@ main:
     bl print
     mtspr 8, 17
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"

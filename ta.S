@@ -15,11 +15,16 @@ f1:
     blr
     .global f2
 f2:
+#got into state
+#0:f2:0
+#hello is there anybody in there
     ld 15, x@toc(2)
     std  15, zztop@toc(2)
     blr
     .global main
 main:
+#got into state
+#1:main:0
     mfspr 17, 8
     push 17
     bl f1
@@ -28,6 +33,9 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#0:main:0
+#hello is there anybody in there
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -56,6 +64,8 @@ main:
     pop 17
     mtspr 8, 17
     std  15, a@toc(2)
+#got into state
+#1:main:0
     mfspr 17, 8
     push 17
     bl f1
@@ -64,6 +74,8 @@ main:
     mfspr 17, 8
     bl print
     mtspr 8, 17
+#got into state
+#5:main:0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -73,6 +85,7 @@ main:
     xor 27, 27, 27
     b exit
     b exit
+#but why tho
     .data
      .fill 8000
 .section ".toc", "aw"
