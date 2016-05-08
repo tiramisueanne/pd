@@ -16,6 +16,7 @@ main:
 #hello is there anybody in there
 #got into case 1 with an eARRAY
 #this is the length of the array 3
+#wtf where am I 0
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -38,6 +39,7 @@ main:
     add 15, 15, 27
     xor 27, 27, 27
     std 15, x0@toc(2)
+#wtf where am I 1
     xor 15, 15, 15
     xor 8, 8, 8
     li 8, 8
@@ -60,6 +62,29 @@ main:
     add 15, 15, 27
     xor 27, 27, 27
     std 15, x1@toc(2)
+#wtf where am I 2
+    xor 15, 15, 15
+    xor 8, 8, 8
+    li 8, 8
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 0
+    sld 27, 27, 8
+    addi 27, 27, 3
+    add 15, 15, 27
+    xor 27, 27, 27
+    std 15, x2@toc(2)
     b exit
 #but why tho
     .data

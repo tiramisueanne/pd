@@ -102,7 +102,9 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 //treating them the same as a single number
                 //just changing up the name as well
                 printf("#this is the length of the array %d\n", p->assignValue->arrayBit->n);
-                for(int i=0; i<p->assignValue->arrayBit->n +1; i++) {
+                int length = p->assignValue->arrayBit->n;
+                for(int i=0; i<length; i++) {
+                    printf("#wtf where am I %d\n", i);
                     genExp(p->assignValue->arrayBit->first, funkN);
                     printf("    std 15, %s%d@toc(2)\n", p->assignName, i);
                     p->assignValue->arrayBit = p->assignValue->arrayBit->rest;
@@ -578,6 +580,7 @@ void firstGoes(Funs *p) {
     firstGo(p->first);
     firstGoes(p->rest);
 }
+
 //this goes through all of the functions recursively
 void genFuns(Funs * p) {
     //if there are no more functions, then we stop the recursion
