@@ -251,8 +251,8 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 
             }*/
 
-            if(tmp->next == 0 && strcmp(tmp->var, p->varName) != 0) {
-	        local *newLoc = malloc(sizeof(local));
+            if(tmp->next == 0 && strcmp(tmp->var, p->Name) != 0) {
+	            local *newLoc = malloc(sizeof(local));
                 newLoc->var = p->varName;
                 asprintf(&newLoc->varCalled, "%s%s", p->varName, funkN);
                 newLoc->next = 0;
