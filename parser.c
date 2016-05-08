@@ -439,7 +439,7 @@ static Expression *e1(void) {
         //now to fill up 
         e->kind = eARRAY;
         //e->firstBit = p->first;
-        e->arrayBit = p->rest;
+        e->arrayBit = p;
         //e->length = p->n;
         //aaaaand return
         consume();
