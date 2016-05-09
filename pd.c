@@ -426,6 +426,10 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             /*temp->callTimes = temp->callTimes +1;*/
             for(int x = 1; x<=numOfArgs; x++) {
                 tempArgs = tempArgs->next;
+                //I can put in the full Array right here
+                if(p->callActuals->first->kind == eFULLARRAY) {
+
+                }
                 genExp(p->callActuals->first, stringNamer, funkN);
                 //printf("%s:%s", "this is the name of the function that we are looking at", temp->namefunk);
                 printf("    std 15, %s@toc(2)\n", tempArgs->nam );
@@ -444,7 +448,8 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
         case 9: {
             //I would say that the length and the name of the array should be kept
             //by the program
-
+            //lol look at all this nothing good good
+            
             //we could put down the length in the data section
         }
         case 10: {

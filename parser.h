@@ -8,9 +8,10 @@ typedef struct Expression Expression;
 
 struct Statement;
 typedef struct Statement Statement;
-
+//to handle sending over arrays 
 typedef struct Actuals {
     int n;
+    //we make sure this sends over the arrayBits
     Expression *first;
     struct Actuals *rest;
 } Actuals;
@@ -32,7 +33,8 @@ enum EKind {
     eGT,
     eCALL,
     eARRAY,
-    eINDEX
+    eINDEX,
+    eFULLARRAY
 };
 
 //we could add the array to the different
@@ -48,12 +50,13 @@ struct Expression {
             uint64_t index;
         };
         /* EARRAY */ struct{
-                //I don't know how to make it so that 
+                //I don't know how to make it so that
                 //it's not expression pointers lol
                 //Expression *firstBit;
                 ArrayBits *arrayBit;
                 //uint32_t length;
         };
+        char *fullName;
         /* EPLUS, EMUL, ... */ struct {
             Expression *left;
             Expression *right;
@@ -132,6 +135,7 @@ typedef struct Statements {
 typedef struct Formals {
     int n;
     char* first;
+    int isArray;
     struct Formals *rest;
 } Formals;
 

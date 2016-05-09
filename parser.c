@@ -221,7 +221,10 @@ static void peek() {
                 consumeChar();
                 current.kind = tCOMMA;
                 return;
-
+            case '~':
+                consumeChar();
+                current.kind = tTILDE;
+                break;
             case ' ':
             case 9:
             case 10:
@@ -243,7 +246,10 @@ static void consume() {
     }
     current.kind = tNONE;
 }
-
+static int isTilde() {
+    peek();
+    return current.kind == tTILDE;
+}
 static int isReturn() {
     peek();
     return current.kind == tRETURN;
@@ -382,6 +388,8 @@ static Actuals *actuals(void) {
     if (isRight())
         return 0;
     Actuals *p = NEW(Actuals);
+    //this will have to stay; we must handle 
+    //resetting everything in expression
     p->first = expression();
     p->rest = 0;
     p->n = 1;
@@ -433,7 +441,7 @@ static Expression *e1(void) {
         return e;
         //this is where we notify our program THAT AN ARRAY HAS OCCURRED
     } else if (isLeftSq()) {
-        //eat up that left sq
+        //eat up that white space
         consume();
         //create an expression to return
         Expression *e = NEW(Expression);
@@ -446,6 +454,16 @@ static Expression *e1(void) {
         //e->length = p->n;
         //aaaaand return
         consume();
+        return e;
+    } 
+    //checking to see if you are a full array 
+    else if(isTilde()) {
+        //make a new expression
+        Expression *e = NEW(Expression);
+        //we are now looking at the full array
+        e->kind = eFULLARRAY;
+        //gets the name of the array
+        e->fullName = getId();
         return e;
     }
     else if (isId()) {
@@ -707,9 +725,16 @@ static Block *block(void) {
 /* [<id> [, <formals>]] */
 static Formals *formals() {
     Formals *p = 0;
-
-    if (isId()) {
+    //check if it's an array or nah first
+    if(isTilde()) {
         p = NEW(Formals);
+        p->isArray =1;
+    }
+    if (isId()) {
+        if(p == 0) {
+            p = NEW(Formals);
+            p->isArray = 0;
+        }
         p->first = getId();
         consume();
         p->n = 1;
