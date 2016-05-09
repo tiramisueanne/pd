@@ -426,6 +426,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             /*temp->callTimes = temp->callTimes +1;*/
             for(int x = 1; x<=numOfArgs; x++) {
                 tempArgs = tempArgs->next;
+                printf("# The first call Actuals kind is %d\n", p->callActuals->first->kind);
                 //I can put in the full Array right here
                 if(p->callActuals->first->kind == eFULLARRAY) {
                     printf("#WE HAVE GONE FULL ARRAY RIGHT NOW\n");
