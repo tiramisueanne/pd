@@ -109,19 +109,19 @@
 f:
 #got into state
 #1:f:0
-    ld 15, 404
+    ld 15, a0@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
 #got into state
 #1:f:0
-    ld 15, 404
+    ld 15, a1@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
 #got into state
 #1:f:0
-    ld 15, 404
+    ld 15, a2@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17
@@ -155,7 +155,7 @@ endExp8:
     bc 0xC ,2, elsef
 #got into state
 #5:f:0
-    ld 15, 404
+    ld 15, a0@toc(2)
 #got past the genexp
     blr
     b endstatef

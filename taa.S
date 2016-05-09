@@ -33,7 +33,7 @@
     .text
     .global f1
 f1:
-    ld 15, 404
+    ld 15, zztop1@toc(2)
     blr
     blr
     .global f2

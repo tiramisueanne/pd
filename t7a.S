@@ -48,7 +48,7 @@ a:
 b:
 #got into state
 #5:b:0
-    ld 15, 404
+    ld 15, y0@toc(2)
 #got past the genexp
     blr
     blr

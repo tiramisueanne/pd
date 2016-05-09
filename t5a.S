@@ -144,7 +144,7 @@ main:
     std 15, a4@toc(2)
 #got into state
 #1:main:0
-    ld 15, 404
+    ld 15, a10@toc(2)
     mfspr 17, 8
     bl print
     mtspr 8, 17

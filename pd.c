@@ -529,22 +529,12 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 newLoc->next = 0;
                 tmp->next = newLoc;
                 tmp = tmp->next;
-                if(!(newLoc->length <= p->index)){
-                    printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
-                    break;
-                } else {
-                    printf("    ld 15, 404\n");
-                    break;
-                }
+                printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
+                break;
             }
-            if(tmp->length > p->index){
                 //printf("prints from the case 0 of genexp");i
                 printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
                 break;
-            } else {
-                printf("    ld 15, 404\n");
-                break;
-            }
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);
