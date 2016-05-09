@@ -1,16 +1,22 @@
-PROTOCOL:
+Contribution of each team member:
+Emma Zawila
+Sue Anne Davis
 
-- variable names for non-arrays cannot begin with integers
+What did you propose to do?
+We proposed to implement arrays in the fun language and bounds check them.
+We considered preserving control flow integrity if we had time, but we would have to make locality and implement some sort of a stack in order to do this.
+
+what did you actually do?
+We implemented arrays, but we didn't complete the control flow integrity portion.
+Our fun language can handle arrays with the following protocol:
+
+- variable names for non-arrays cannot end with integers
 - fun language protocal dictates that you cannot access an array without having initialized it
-- you can pass whole arrays into funs
-- you cannot access any elements outside of the bounds of the array (i.e. array of size three can access index 0,1,2)
+- you can pass whole arrays into functions. If you do this though, you must indicate this through adding a "~" before the array name. (i.e. fun function(~array, numVar, numVar))
+- you cannot access any elements outside of the bounds of the array (i.e. array of size three can access index 0,1,2) Anytime an array is accessed out of bounds and attempted to print, the program will output "404" to indicate the illegal access. If any value that is outside of the assigned range is attempted to access, it will recieve the value 404.
 
+What was difficult?
+The most difficult portion was perserving the unity of the array. We handle arrays by chopping them up into smaller portions and treating each like a variable, so it was hard to ensure that the array was unified. We chose to do this because the fun language is already very fitting for single integer variables. An example of when this became an issue is when we pass in an array as an argument. We had to make this a special case and in order to distinguish it, we added a tilda.
 
-TO DO:
--bounds checking
--t1
--t2
--t3..t9
--tb
--tc
--td... tg
+What did you learn?
+I learned github much more extensively. For us, the project was far more about utilizing preexising knowledge in order to implement this new addition of arrays. However, we did learn the ins and outs of the parser portion of the fun language far more than we had previously known. Through our understanding in the parser, we could modify portions in order to accomodate for new symbols and for arrays.

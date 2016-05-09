@@ -1,0 +1,6 @@
+Please include clear and simple instructions for running your project.
+In order to run the project, you can type in "make clean test" and the Makefile will compile and run all of the tests. The structure is the same as that of p5. There are test files, out files, diff files, and ok files. The ok files show the expected output, the out files are the actual output files, the diff files show any distinction between the ok and out files.
+
+
+Explain why your supplied tests illustrate that your project works
+
