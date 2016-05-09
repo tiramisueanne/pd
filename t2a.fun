@@ -4,7 +4,7 @@ fun f(~a,i,n) {
     print a[2]
     print i
     print n
-    if (i == n) return ~a
+    if (i == n) return a[0]
     return f(~a, i+1, n)
 }
 
@@ -15,5 +15,5 @@ return f(~a,1,n)
 
 fun main() {
     z = factorial(5)
-    print z[2]
+    print z
 }

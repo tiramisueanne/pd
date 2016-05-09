@@ -393,12 +393,14 @@ static Actuals *actuals(void) {
     if (isRight())
         return 0;
     Actuals *p = NEW(Actuals);
-    //this will have to stay; we must handle 
+    //this will have to stay; we must handle
     //resetting everything in expression
+    printf("#before getting the expression in actuals\n");
     p->first = expression();
     p->rest = 0;
     p->n = 1;
-
+    printf("#after getting the expresssion in actuals\n");
+    printf("#the kind of expression you just got %d\n", p->first->kind);
     if (isComma()) {
         consume();
         p->rest = actuals();
@@ -410,10 +412,13 @@ static Actuals *actuals(void) {
 
 //read up the array and store it in a new union
 static ArrayBits *arrayBits(void) {
+
     if(isRightSq()) {
         return 0;
     }
     ArrayBits *p = NEW(ArrayBits);
+
+
     p->first = expression();
     p->rest = 0;
     p->n = 1;
@@ -470,12 +475,12 @@ static Expression *e1(void) {
         printf("#woop woop new expression made\n");
         //we are now looking at the full array
         //printf("#%c\n", peekChar());
-        /*e->kind = eFULLARRAY;*/
+        e->kind = eFULLARRAY;
         //gets the name of the array
         if(isId()) {
             printf("#it is saying that the next one is an id\n");
         }
-        /*e->fullName =*/ getId();
+        e->fullName = getId();
         printf("#hey do u get the id in fullarray\n");
         consume();
         printf("#I have consumed the id in fullarray\n");
