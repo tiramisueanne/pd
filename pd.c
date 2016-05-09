@@ -522,7 +522,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 
             }*/
 
-            if(tmp->next == 0 && strcmp(tmp->var, p->arrayName) != 0) {
+            /*if(tmp->next == 0 && strcmp(tmp->var, p->arrayName) != 0) {
             local *newLoc = malloc(sizeof(local));
                 newLoc->var = p->arrayName;
                 asprintf(&newLoc->varCalled, "%s%s", p->arrayName, funkN);
@@ -531,10 +531,15 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 tmp = tmp->next;
                 printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
                 break;
-            }
-                //printf("prints from the case 0 of genexp");i
+            }*/
+            //printf("prints from the case 0 of genexp");i
+            if(tmp->length > p->index){
                 printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
                 break;
+            } else {
+                printf("    ld 15, 404\n");
+                break;
+            }
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);

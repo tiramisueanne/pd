@@ -1,7 +1,14 @@
 #in formals
 #found the beginning of the array
+#heyo found the end
+#found the beginning of the array
+#heyo found the end
+#before we get the ID in isID
+#after consume in is Id 
+#found the beginning of the array
+#heyo found the end
 undefined char 45
-#===> error at 2:10 <===
+#===> error at 4:14 <===
 .macro push arg1
     std \arg1, 8(1)
     addi 1, 1, 8

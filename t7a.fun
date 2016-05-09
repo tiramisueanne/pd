@@ -4,7 +4,7 @@ fun a(v) {
     return x
 }
 
-fun b(x) {
+fun b(~y) {
     return y[0]
 }
 

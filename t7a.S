@@ -3,6 +3,9 @@
 #before we get the ID in isID
 #after consume in is Id 
 #in formals
+#I HAVE IDENTIFIED A TILDE
+#I FOUND A FUCKING TILDE
+#WE HAVE FOUND A FORMAL THAT IS SUPPOSED TO BE A FULL ARRAY
 #we have found a formal without a tilde instead
 #before we get the ID in isID
 #after consume in is Id 
@@ -48,7 +51,7 @@ a:
 b:
 #got into state
 #5:b:0
-    ld 15, y0@toc(2)
+    ld 15, 404
 #got past the genexp
     blr
     blr
@@ -167,7 +170,7 @@ main:
 #1:main:0
 # The first call Actuals kind is 0
     ld 15, y@toc(2)
-    std 15, x@toc(2)
+    std 15, y@toc(2)
     mfspr 17, 8
     push 17
     bl b

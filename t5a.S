@@ -144,7 +144,7 @@ main:
     std 15, a4@toc(2)
 #got into state
 #1:main:0
-    ld 15, a10@toc(2)
+    li 15, 404
     mfspr 17, 8
     bl print
     mtspr 8, 17
@@ -157,7 +157,7 @@ main:
     addi 27, 27, 0
     add 15, 15, 27
     xor 27, 27, 27
-    std 15, 404
+    li 15, 404
 #got into state
 #1:main:0
     ld 15, a0@toc(2)

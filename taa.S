@@ -33,7 +33,7 @@
     .text
     .global f1
 f1:
-    ld 15, zztop1@toc(2)
+    ld 15, 404
     blr
     blr
     .global f2
@@ -158,8 +158,8 @@ main:
     .data
      .fill 8000
 .section ".toc", "aw"
-zztop:    .quad 0
 x:    .quad 0
+zztop:    .quad 0
 array0:   .quad 0
 array1:   .quad 0
 array2:   .quad 0
