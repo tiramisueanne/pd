@@ -236,9 +236,7 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
             }
             if(tmp->length > p->index){
                 printf("    std 15, %s%d@toc(2)\n", p->arrayName, p->index);
-            } else {
-                printf("    std 15, 404\n");
-            }
+            } 
             break;
         }
         default: {
@@ -495,12 +493,23 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
 
             //we could put down the length in the data section
         }
+        //
         case 10: {
+            printf("#this is the arrayName %s\n", p->arrayName);
             while(strcmp(tmp->var, p->arrayName) != 0 && tmp->next != 0 ) {
                 tmp = tmp->next;
-                    //printf("%s\n", tmp->var);
+                printf("# this is the tmp->var %s\n", tmp->var);
             }
-            asprintf(&namr, "%s%s%lu", p->arrayName, stringNamer, p->index);
+            if(tmp == 0) {
+                printf("    #panic");
+            }
+            printf("#this is the tmp's length %d\n", tmp->length);
+            if(p->index >= tmp->length && tmp->length != 0) {
+                printf("    xor 15, 15, 15\n");
+                printf("    addi 15, 15, 404\n");
+                break;
+            }
+            //asprintf(&namr, "%s%s%lu", p->arrayName, stringNamer, p->index);
             /*while(strcmp(tmp->var, p->arrayName) == 0 && strcmp(tmp->varCalled, namr) != 0 ) {
                 namr[strlen(namr)-2] =  '\0';
                 //printf("%s\n", namr);
@@ -523,6 +532,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             }*/
 
             /*if(tmp->next == 0 && strcmp(tmp->var, p->arrayName) != 0) {
+<<<<<<< HEAD
             local *newLoc = malloc(sizeof(local));
                 newLoc->var = p->arrayName;
                 asprintf(&newLoc->varCalled, "%s%s", p->arrayName, funkN);
@@ -539,6 +549,21 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             } else {
                 printf("    ld 15, 404\n");
                 break;
+=======
+                    local *newLoc = malloc(sizeof(local));
+                    newLoc->var = p->arrayName;
+                    asprintf(&newLoc->varCalled, "%s%s", p->arrayName, funkN);
+                    newLoc->next = 0;
+                    tmp->next = newLoc;
+                    tmp = tmp->next;
+                    if(p->index < newLoc) 
+                    printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
+                    break;
+            }*/
+            else {
+                printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
+                break;
+>>>>>>> 2d1377c641a7d61fb07132c3e7118279f58d587f
             }
         }
         default: {
