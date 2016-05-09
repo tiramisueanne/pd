@@ -497,12 +497,32 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
         case 10: {
             printf("#this is the arrayName %s\n", p->arrayName);
             while(strcmp(tmp->var, p->arrayName) != 0 && tmp->next != 0 ) {
-                tmp = tmp->next;
                 printf("# this is the tmp->var %s\n", tmp->var);
+                tmp = tmp->next;
+                
             }
-            if(tmp == 0) {
+            /*
+            if(tmp != 0 && tmp->next == 0) {
+                if(strcmp(tmp->var, p->arrayName) != 0) {
+                    tmp = tmp->next;
+                }
+            }*/
+            if(tmp->next == 0) {
+                temp = header;
+                temp = temp->next;
+                printf("#this is the namefunk %s\n", temp->namefunk);
+                /*while( temp->next != 0 && strcmp(temp->namefunk, "main") != 0) {
+                    temp = temp->next;
+                }
+                local *locs = temp->locals;
+                locs = locs->next;
+                while( locs->next != 0 && strcmp(locs->var, p->arrayName) != 0 ) {
+                    locs = locs->next;
+                }
                 printf("    #panic");
+                tmp = locs;*/
             }
+
             printf("#this is the tmp's length %d\n", tmp->length);
             if(p->index >= tmp->length && tmp->length != 0) {
                 printf("    xor 15, 15, 15\n");
