@@ -29,14 +29,26 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #before we get the ID in isID
@@ -54,12 +66,21 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #before we get the ID in isID
@@ -71,16 +92,25 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #in formals
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
 .macro push arg1
     std \arg1, 8(1)
     addi 1, 1, 8

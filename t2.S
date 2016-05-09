@@ -19,25 +19,46 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 3
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
 #in formals
 #we have found a formal without a tilde instead
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
 #in formals
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
 .macro push arg1
     std \arg1, 8(1)
     addi 1, 1, 8
@@ -88,6 +109,7 @@ endExp6:
 #got into state
 #5:f:0
     ld 15, a@toc(2)
+#got past the genexp
     blr
     b endstatef
 elsef:
@@ -136,6 +158,7 @@ endstatef:
     bl f
     pop 17
     mtspr 8, 17
+#got past the genexp
     blr
     blr
     .global factorial

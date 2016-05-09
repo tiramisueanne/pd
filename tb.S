@@ -70,6 +70,7 @@ endExp4:
     addi 27, 27, 0
     add 15, 15, 27
     xor 27, 27, 27
+#got past the genexp
     b exit
     b endstatemain
 elsemain:

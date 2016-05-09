@@ -2,15 +2,27 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #in formals
 #we have found a formal without a tilde instead
 #before we get the ID in isID

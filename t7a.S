@@ -14,11 +14,17 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
+#after getting the expresssion in actuals
+#the kind of expression you just got 0
 .macro push arg1
     std \arg1, 8(1)
     addi 1, 1, 8
@@ -35,6 +41,7 @@ a:
 #got into state
 #5:a:0
     ld 15, x@toc(2)
+#got past the genexp
     blr
     blr
     .global b
@@ -42,6 +49,7 @@ b:
 #got into state
 #5:b:0
     ld 15, 404
+#got past the genexp
     blr
     blr
     .global main

@@ -12,6 +12,9 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 1
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
@@ -101,6 +104,7 @@ main:
     addi 27, 27, 0
     add 15, 15, 27
     xor 27, 27, 27
+#got past the genexp
     b exit
     b exit
 #but why tho

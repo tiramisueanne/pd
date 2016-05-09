@@ -6,41 +6,51 @@
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
 #found the beginning of the array
 #heyo found the end
-#found the beginning of the array
-#heyo found the end
-#before we get the ID in isID
-#after consume in is Id 
-#passed the left smooth bracket
-#before we get the ID in isID
-#after consume in is Id 
-#found the beginning of the array
-#heyo found the end
-#before we get the ID in isID
-#after consume in is Id 
-#found the beginning of the array
-#heyo found the end
-#before we get the ID in isID
-#after consume in is Id 
-#found the beginning of the array
-#heyo found the end
-#before we get the ID in isID
-#after consume in is Id 
-#found the beginning of the array
-#heyo found the end
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #found the beginning of the array
 #heyo found the end
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#before we get the ID in isID
+#after consume in is Id 
+#found the beginning of the array
+#heyo found the end
+#before we get the ID in isID
+#after consume in is Id 
+#found the beginning of the array
+#heyo found the end
+#before we get the ID in isID
+#after consume in is Id 
+#found the beginning of the array
+#heyo found the end
+#before we get the ID in isID
+#after consume in is Id 
+#found the beginning of the array
+#heyo found the end
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #found the beginning of the array
 #heyo found the end
 #before we get the ID in isID
 #after consume in is Id 
 #passed the left smooth bracket
+#before getting the expression in actuals
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
+#found the beginning of the array
+#heyo found the end
+#before we get the ID in isID
+#after consume in is Id 
+#passed the left smooth bracket
+#before getting the expression in actuals
 #before we get the ID in isID
 #after consume in is Id 
 #found the beginning of the array
@@ -53,6 +63,8 @@
 #after consume in is Id 
 #found the beginning of the array
 #heyo found the end
+#after getting the expresssion in actuals
+#the kind of expression you just got 2
 #in formals
 #we have found a formal without a tilde instead
 #before we get the ID in isID
@@ -376,6 +388,7 @@ show:
 #got into state
 #5:show:0
     ld 15, x@toc(2)
+#got past the genexp
     blr
     blr
 #but why tho
