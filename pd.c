@@ -231,7 +231,11 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
                 off += 64;
                 tmp->next = newLoc;
             }
-            printf("    std 15, %s%d@toc(2)\n", p->arrayName, p->index);
+            if(tmp->length > p->index){
+                printf("    std 15, %s%d@toc(2)\n", p->arrayName, p->index);
+            } else {
+                printf("    std 15, 404\n");
+            }
             break;
         }
         default: {
@@ -497,12 +501,22 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 newLoc->next = 0;
                 tmp->next = newLoc;
                 tmp = tmp->next;
-                printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
+                if(!(newLoc->length <= p->index)){
+                    printf("    ld 15, %s%lu@toc(2)\n",  newLoc->var, p->index);
+                    break;
+                } else {
+                    printf("    ld 15, 404\n");
+                    break;
+                }
+            }
+            if(tmp->length > p->index){
+                //printf("prints from the case 0 of genexp");i
+                printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
+                break;
+            } else {
+                printf("    ld 15, 404\n");
                 break;
             }
-            //printf("prints from the case 0 of genexp");i
-            printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
-            break;
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);

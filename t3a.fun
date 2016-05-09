@@ -1,10 +1,10 @@
 fun factorial(n) {
     print n
     i = [0]
-    v = [1]
-    while (i[0] < n[0]) {
+    v = 1
+    while (i[0] < n) {
         i[0] = i[0] + 1
-        v[0] = v[0] * i[0]
+        v = v * i[0]
     }
 
     return v
