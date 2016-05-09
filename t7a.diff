@@ -1,3 +1,5 @@
+===> t7a ... fail
+----- test -----
 
 
 fun a(v) {
@@ -14,4 +16,6 @@ fun main() {
     y = [30, 2]
     print a(20)
     print b(~y)
-}
+}----- expected ------
+100
+30----- found -----
