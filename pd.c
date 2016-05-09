@@ -187,8 +187,11 @@ void state(Statement *p, char *Stringnamer, char *funkN) {
         }
         //the return value
         case 5: {
+
             /*printf("got into the return value");*/
+            //just don't ever return arrays
             genExp(p->returnValue, Stringnamer, funkN);
+            printf("#got past the genexp\n");
             if(strcmp(funkN, "main") != 0) {
                 printf("    blr\n");
             }
@@ -431,13 +434,38 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 if(p->callActuals->first->kind == eFULLARRAY) {
                     printf("#WE HAVE GONE FULL ARRAY RIGHT NOW\n");
                     //finding the local variable that is the actual
-                    while(strcmp(tmp->var, p->callActuals->first->fullName) != 0 && tmp->next != 0 ) {
+                    
+                    printf("#the variable name I am looking for (p->callActuals->first->fullName) %s\n", p->callActuals->first->fullName);
+                    while(tmp != 0 && strcmp(tmp->var, p->callActuals->first->fullName) != 0) {
                         tmp = tmp->next;
                         //printf("%s\n", tmp->var);
+                        printf("#the variable name I am looking for right now (tmp->var) %s\n", tmp->var);
                     }
-                    if(tmp->next == 0) {
+                    if(tmp == 0) {
                         printf("#I AM PANICKING\n");
                     }
+                    int length = tmp->length;
+                    printf("#the length of my array that I'm trying to pass %d\n", length);
+                    local *findLoc = temp->locals;
+                    while(strcmp(tempArgs->nam, findLoc->var) != 0 && findLoc->next != 0) {
+                        findLoc = findLoc->next;
+                    }
+                    if(findLoc->next == 0) {
+                        local *newLoc = malloc(sizeof(local));
+                        newLoc->var = tempArgs->nam;
+                        newLoc->isArray = 1;
+                        newLoc->next = 0;
+                        newLoc->length = length;
+                    }
+                    else {
+                        findLoc->isArray = 1;
+                        findLoc->length = length;
+                    }
+                    for(int i = 0 ; i<length; i++) {
+                        printf("    ld 15, %s%d@toc(2)\n", p->callActuals->first->fullName, i);
+                        printf("    std 15, %s%d@toc(2)\n", tempArgs->nam, i);
+                    }
+                    p->callActuals = p->callActuals->rest;
                 }
                 else {
                     genExp(p->callActuals->first, stringNamer, funkN);
