@@ -221,10 +221,12 @@ static void peek() {
                 consumeChar();
                 current.kind = tCOMMA;
                 return;
-            case '~':
+            case '~': {
+                printf("#I HAVE IDENTIFIED A TILDE\n");
                 consumeChar();
                 current.kind = tTILDE;
-                break;
+                return;
+            }
             case ' ':
             case 9:
             case 10:
@@ -444,7 +446,7 @@ static Expression *e1(void) {
         return e;
         //this is where we notify our program THAT AN ARRAY HAS OCCURRED
     } else if (isLeftSq()) {
-        //eat up that white space
+        //eat up that Lftsq
         consume();
         //create an expression to return
         Expression *e = NEW(Expression);
@@ -461,21 +463,32 @@ static Expression *e1(void) {
     } 
     //checking to see if you are a full array 
     else if(isTilde()) {
+        consume();
         printf("#HEYO WE HAVE FOUND AN EXPRESSION WHICH IS SUPPOSED TO BE A FULL ARRAY\n");
         //make a new expression
         Expression *e = NEW(Expression);
+        printf("#woop woop new expression made\n");
         //we are now looking at the full array
-        e->kind = eFULLARRAY;
+        //printf("#%c\n", peekChar());
+        /*e->kind = eFULLARRAY;*/
         //gets the name of the array
-        e->fullName = getId();
+        if(isId()) {
+            printf("#it is saying that the next one is an id\n");
+        }
+        /*e->fullName =*/ getId();
+        printf("#hey do u get the id in fullarray\n");
+        consume();
+        printf("#I have consumed the id in fullarray\n");
         return e;
     }
     else if (isId()) {
         /* xyz */
+        printf("#before we get the ID in isID\n");
         char *id = getId();
         consume();
+        printf("#after consume in is Id \n");
         if (isLeft()) {
-            printf("#did we get into actuals\n");
+            printf("#passed the left smooth bracket\n");
             /* xyz ( <actuals> ) */
             consume();
 
@@ -730,12 +743,15 @@ static Block *block(void) {
 static Formals *formals() {
     Formals *p = 0;
     //check if it's an array or nah first
+    printf("#in formals\n");
     if(isTilde()) {
         printf("#WE HAVE FOUND A FORMAL THAT IS SUPPOSED TO BE A FULL ARRAY\n");
         p = NEW(Formals);
         p->isArray =1;
+        consume();
     }
     if (isId()) {
+        printf("#we have found a formal without a tilde instead\n");
         if(p == 0) {
             p = NEW(Formals);
             p->isArray = 0;
