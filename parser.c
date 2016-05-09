@@ -33,7 +33,9 @@ enum TKind {
     tRETURN,
     //added in the left square and right square brackets 
     tLEFTSQ,
-    tRIGHTSQ
+    tRIGHTSQ,
+    //also tilde for ur argumentative needs
+    tTILDE
 };
 
 struct Token {
@@ -219,7 +221,10 @@ static void peek() {
                 consumeChar();
                 current.kind = tCOMMA;
                 return;
-
+            case '~':
+                consumeChar();
+                current.kind = tTILDE;
+                break;
             case ' ':
             case 9:
             case 10:
@@ -241,7 +246,13 @@ static void consume() {
     }
     current.kind = tNONE;
 }
-
+static int isTilde() {
+    peek();
+    if(current.kind == tTILDE) {
+        printf("#I FOUND A FUCKING TILDE\n");
+    }
+    return current.kind == tTILDE;
+}
 static int isReturn() {
     peek();
     return current.kind == tRETURN;
@@ -380,6 +391,8 @@ static Actuals *actuals(void) {
     if (isRight())
         return 0;
     Actuals *p = NEW(Actuals);
+    //this will have to stay; we must handle 
+    //resetting everything in expression
     p->first = expression();
     p->rest = 0;
     p->n = 1;
@@ -431,7 +444,7 @@ static Expression *e1(void) {
         return e;
         //this is where we notify our program THAT AN ARRAY HAS OCCURRED
     } else if (isLeftSq()) {
-        //eat up that left sq
+        //eat up that white space
         consume();
         //create an expression to return
         Expression *e = NEW(Expression);
@@ -445,12 +458,24 @@ static Expression *e1(void) {
         //aaaaand return
         consume();
         return e;
+    } 
+    //checking to see if you are a full array 
+    else if(isTilde()) {
+        printf("#HEYO WE HAVE FOUND AN EXPRESSION WHICH IS SUPPOSED TO BE A FULL ARRAY\n");
+        //make a new expression
+        Expression *e = NEW(Expression);
+        //we are now looking at the full array
+        e->kind = eFULLARRAY;
+        //gets the name of the array
+        e->fullName = getId();
+        return e;
     }
     else if (isId()) {
         /* xyz */
         char *id = getId();
         consume();
         if (isLeft()) {
+            printf("#did we get into actuals\n");
             /* xyz ( <actuals> ) */
             consume();
 
@@ -488,6 +513,7 @@ static Expression *e1(void) {
             return e;
         }
     } else {
+
         error();
         return 0;
     }
@@ -703,9 +729,17 @@ static Block *block(void) {
 /* [<id> [, <formals>]] */
 static Formals *formals() {
     Formals *p = 0;
-
-    if (isId()) {
+    //check if it's an array or nah first
+    if(isTilde()) {
+        printf("#WE HAVE FOUND A FORMAL THAT IS SUPPOSED TO BE A FULL ARRAY\n");
         p = NEW(Formals);
+        p->isArray =1;
+    }
+    if (isId()) {
+        if(p == 0) {
+            p = NEW(Formals);
+            p->isArray = 0;
+        }
         p->first = getId();
         consume();
         p->n = 1;
@@ -732,8 +766,10 @@ static Fun *fun() {
 
     Fun *p = NEW(Fun);
 
-    if (!isId())
+    if (!isId()) {
+        printf("#error at not an Id\n");
         error();
+    }
     p->name = getId();
     consume();
 
