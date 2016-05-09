@@ -248,6 +248,9 @@ static void consume() {
 }
 static int isTilde() {
     peek();
+    if(current.kind == tTILDE) {
+        printf("#I FOUND A FUCKING TILDE\n");
+    }
     return current.kind == tTILDE;
 }
 static int isReturn() {
@@ -458,6 +461,7 @@ static Expression *e1(void) {
     } 
     //checking to see if you are a full array 
     else if(isTilde()) {
+        printf("#HEYO WE HAVE FOUND AN EXPRESSION WHICH IS SUPPOSED TO BE A FULL ARRAY\n");
         //make a new expression
         Expression *e = NEW(Expression);
         //we are now looking at the full array
@@ -727,6 +731,7 @@ static Formals *formals() {
     Formals *p = 0;
     //check if it's an array or nah first
     if(isTilde()) {
+        printf("#WE HAVE FOUND A FORMAL THAT IS SUPPOSED TO BE A FULL ARRAY\n");
         p = NEW(Formals);
         p->isArray =1;
     }
@@ -761,8 +766,10 @@ static Fun *fun() {
 
     Fun *p = NEW(Fun);
 
-    if (!isId())
+    if (!isId()) {
+        printf("#error at not an Id\n");
         error();
+    }
     p->name = getId();
     consume();
 

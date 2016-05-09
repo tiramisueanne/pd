@@ -428,12 +428,22 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 tempArgs = tempArgs->next;
                 //I can put in the full Array right here
                 if(p->callActuals->first->kind == eFULLARRAY) {
-
+                    printf("#WE HAVE GONE FULL ARRAY RIGHT NOW\n");
+                    //finding the local variable that is the actual
+                    while(strcmp(tmp->var, p->callActuals->first->fullName) != 0 && tmp->next != 0 ) {
+                        tmp = tmp->next;
+                        //printf("%s\n", tmp->var);
+                    }
+                    if(tmp->next == 0) {
+                        printf("#I AM PANICKING\n");
+                    }
                 }
-                genExp(p->callActuals->first, stringNamer, funkN);
-                //printf("%s:%s", "this is the name of the function that we are looking at", temp->namefunk);
-                printf("    std 15, %s@toc(2)\n", tempArgs->nam );
-                p->callActuals = p->callActuals->rest;
+                else {
+                    genExp(p->callActuals->first, stringNamer, funkN);
+                    //printf("%s:%s", "this is the name of the function that we are looking at", temp->namefunk);
+                    printf("    std 15, %s@toc(2)\n", tempArgs->nam );
+                    p->callActuals = p->callActuals->rest;
+                }
             }
             //if(strcmp(funkN, p->callName) != 0) {
             printf("    mfspr 17, 8\n");
@@ -449,7 +459,7 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
             //I would say that the length and the name of the array should be kept
             //by the program
             //lol look at all this nothing good good
-            
+
             //we could put down the length in the data section
         }
         case 10: {
