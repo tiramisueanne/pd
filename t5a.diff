@@ -7,5 +7,5 @@ fun main() {
 	print a[0]
 }----- expected ------
 404
-404
-0----- found -----
+1
+----- found -----

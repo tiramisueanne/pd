@@ -3,4 +3,19 @@ In order to run the project, you can type in "make clean test" and the Makefile 
 
 
 Explain why your supplied tests illustrate that your project works
+The additional test cases we added from p5 are listed below accompanied by the reasoning behind their existence.
 
+t0a.fun:
+This constructs a basic array and accesses each of the elements. It verifies that the fun language can build arrays and access specific elements within the array.
+
+t1a.fun:
+This test case puts array indexing into arguments and ensures that an array index can actually be changed (i.e. a[1] = ...). We test this by using previously changed array portions in future computations and test to see wheter the effect is still there.
+
+t2a.fun:
+This test case passes in a whole array as an argument, indicated by the tilda. The test case establishes the ability to pass arrays as arguments and between functions. However, arrays cannot be returned.
+
+t3a.fun:
+This test case shows that an array access can be used within a conditional and more significantly in recursion.
+
+t5a.fun:
+This test checks for an out-of-bounds array. Through this specific test, we can definitively say that a fun language programmer cannot access an element outside of an array through indexing to it. Our implementation will return the value of 404 whenever an out-of-bounds element is accessed and do nothing whenever an out-of-bound element is written to.
