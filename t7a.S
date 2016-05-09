@@ -60,7 +60,7 @@ b:
 # this is the tmp->var 
 #this is the namefunk a
 #this is the tmp's length 0
-    ld 15, 404
+    ld 15, p0@toc(2)
 #got past the genexp
     blr
     blr
@@ -184,9 +184,9 @@ main:
 #the variable name I am looking for right now (tmp->var) y
 #the length of my array that I'm trying to pass 2
     ld 15, y0@toc(2)
-    std 15, y0@toc(2)
+    std 15, p0@toc(2)
     ld 15, y1@toc(2)
-    std 15, y1@toc(2)
+    std 15, p1@toc(2)
     mfspr 17, 8
     push 17
     bl b
@@ -202,7 +202,9 @@ main:
 .section ".toc", "aw"
 v:    .quad 0
 x:    .quad 0
-y:    .quad 0
+p:    .quad 0
+y0:   .quad 0
+y1:   .quad 0
 stackBase:
 stackBasePtr:
     .quad stackBase

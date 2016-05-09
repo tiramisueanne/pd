@@ -529,6 +529,10 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 printf("    addi 15, 15, 404\n");
                 break;
             }
+            else {
+                printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
+                break;
+            }
             //asprintf(&namr, "%s%s%lu", p->arrayName, stringNamer, p->index);
             /*while(strcmp(tmp->var, p->arrayName) == 0 && strcmp(tmp->varCalled, namr) != 0 ) {
                 namr[strlen(namr)-2] =  '\0';
@@ -563,13 +567,6 @@ void genExp(Expression *p, char *stringNamer, char *funkN) {
                 break;
             }*/
             //printf("prints from the case 0 of genexp");i
-            if(tmp->length > p->index){
-                printf("    ld 15, %s%lu@toc(2)\n", tmp->var, p->index);
-                break;
-            } else {
-                printf("    ld 15, 404\n");
-                break;
-            }
         }
         default: {
             printf("%s%d", "this is the default of Genexp", p->kind);

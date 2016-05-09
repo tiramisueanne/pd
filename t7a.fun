@@ -5,7 +5,7 @@ fun a(v) {
 }
 
 
-fun b(~y) {
+fun b(~p) {
     return y[0]
 }
 
